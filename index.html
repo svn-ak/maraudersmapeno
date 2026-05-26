@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Marauder's Map - UCL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #ebdcb2;
+            --text-color: #2c2a25;
+            --accent-color: #6b2d2d;
+            --border-style: 2px solid #5a4b38;
+            --parchment-glow: radial-gradient(circle at center, #f5ecd8 0%, #d8c397 100%);
+        }
+
+        /* Nox Theme (Night Mode) */
+        .nox {
+            --bg-color: #1a1a1a;
+            --text-color: #d4d4d4;
+            --accent-color: #a8a9ad; /* Silver */
+            --border-style: 2px solid #444;
+            --parchment-glow: radial-gradient(circle at center, #2a2a2a 0%, #111 100%);
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--bg-color);
+            background-image: var(--parchment-glow);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            transition: all 0.5s ease;
+            min-height: 100vh;
+        }
+
+        /* Mischief Managed Blur Effect */
+        body.wiped .content-wrapper {
+            opacity: 0;
+            filter: blur(10px);
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            transition: all 1.5s ease-in-out;
+        }
+
+        h1, h2, h3, .quote-author {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            color: var(--accent-color);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 5px; }
+        .subtitle { text-align: center; font-style: italic; margin-top: 0; }
+
+        /* Sections */
+        section {
+            border: var(--border-style);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Niche Survival Tips List */
+        .prefect-guide ul {
+            list-style-type: "⚡ ";
+            padding-left: 20px;
+        }
+        .prefect-guide li { margin-bottom: 10px; font-size: 1.1rem; }
+
+        /* Owl Post Grid */
+        .owl-post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .quote-card {
+            border: 1px dashed var(--accent-color);
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        /* Expandable Locations */
+        details {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+        summary {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            list-style: none;
+        }
+        summary::-webkit-details-marker { display: none; }
+        .location-info { padding: 10px 0; font-size: 1.1rem; }
+
+        /* Floating Buttons */
+        .magic-controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        button {
+            font-family: 'Cinzel', serif;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <h1>The Marauder's Map</h1>
+        <p class="subtitle">"I solemnly swear that I am up to no good."</p>
+
+        <section class="prefect-guide">
+            <h2>The Prefect's Guide to Outsmarting Muggles</h2>
+            <ul>
+                <li><strong>The Maps Charm:</strong> Delete Google Maps. Download <em>Citymapper</em> immediately. It tells you exactly which carriage to board on the Tube for the fastest exit.</li>
+                <li><strong>The Escalator Law:</strong> Stand on the right. Walk on the left. If you stand on the left during rush hour, Muggles will unforgivably curse you.</li>
+                <li><strong>The Oxford Circus Trap:</strong> If walking through Soho or the West End, do not take the Tube one stop from Oxford Circus to Piccadilly. It takes longer to walk underground than above it.</li>
+                <li><strong>The Bus Hopper Spell:</strong> TFL gives you unlimited bus rides within one hour of your first tap. Use this to hop around without paying twice.</li>
+            </ul>
+        </section>
+
+        <section class="owl-post">
+            <h2>Letters from the Owl Post</h2>
+            <div class="owl-post-grid">
+                <div class="quote-card">
+                    <p>"HARRY! DID YOU PUT YOUR NAME IN THE GOBLET OF FIRE?!"</p>
+                    <p class="quote-author">- Dumbledore (asked calmly)</p>
+                </div>
+                <div class="quote-card">
+                    <p>"HEHEHEH."</p>
+                    <p class="quote-author">- Voldemort (feeling cute)</p>
+                </div>
+                <div class="quote-card">
+                    <p>"[Insert an actual heartfelt message from a friend here. Remind them they are going to crush this semester.]"</p>
+                    <p class="quote-author">- [Friend's Name]</p>
+                </div>
+                <div class="quote-card">
+                    <p>"[Insert another real message here!]"</p>
+                    <p class="quote-author">- [Friend's Name]</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="locations" id="home-base">
+            <h2>🏰 Home Base & Daily Passage</h2>
+            <p class="subtitle">Your personal Hogwarts grounds.</p>
+            
+            <details>
+                <summary>1. Home Base: Wren Street</summary>
+                <div class="location-info">
+                    <p><strong>The Dormitory:</strong> Frances Gardner House. Your Gryffindor Tower (or Slytherin Dungeon). A brief history: This is your sanctuary. Make sure you know where the nearest late-night snack spot is for when the dining hall closes.</p>
+                    </div>
+            </details>
+
+            <details>
+                <summary>2. The Academy: UCL Main Campus</summary>
+                <div class="location-info">
+                    <p><strong>The Classrooms:</strong> Where the magic (and heavy reading) happens. UCL is steeped in history—Jeremy Bentham's actual skeleton is kept in a box here. Very normal, definitely not dark magic.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>3. The Common Room: UCL Student Centre</summary>
+                <div class="location-info">
+                    <p><strong>The Room of Requirement:</strong> 24-hour access. When you need to cram for an exam or just want a coffee at 3 AM because your sleep schedule is ruined, this room will provide.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="locations" id="safe-harbours">
+            <h2>🌿 Safe Harbours</h2>
+            <p class="subtitle">Herbology Greenhouses for when you need to breathe.</p>
+            <p><em>[Locations 4-6 will go here in our next step!]</em></p>
+        </section>
+
+        <section class="locations" id="main-quests">
+            <h2>📜 Main Quests</h2>
+            <p class="subtitle">Ministry of Magic Tier Landmarks.</p>
+            <p><em>[Locations 7-10 will go here in our next step!]</em></p>
+        </section>
+
+        <section class="locations" id="side-quests">
+            <h2>🔍 Side Quests</h2>
+            <p class="subtitle">Oddities and the Room of Hidden Things.</p>
+            <p><em>[Locations 11-16 will go here in our next step!]</em></p>
+        </section>
+
+        <section class="locations" id="food-rescue">
+            <h2>🍲 Food Rescue</h2>
+            <p class="subtitle">The Great Hall Feasts.</p>
+            <p><em>[Locations 17-18 will go here in our next step!]</em></p>
+        </section>
+
+    </div>
+
+    <div class="magic-controls">
+        <button onclick="toggleNox()">Lumos / Nox</button>
+        <button onclick="mischiefManaged()">Mischief Managed</button>
+    </div>
+
+    <script>
+        // Lumos/Nox Time Magic
+        function checkTime() {
+            const hour = new Date().getHours();
+            // If it's past 7 PM (19:00) or before 6 AM, trigger Nox (Dark Mode)
+            if (hour >= 19 || hour < 6) {
+                document.body.classList.add('nox');
+            }
+        }
+
+        // Manual toggle for testing
+        function toggleNox() {
+            document.body.classList.toggle('nox');
+        }
+
+        // Mischief Managed Blur Effect
+        function mischiefManaged() {
+            const body = document.body;
+            body.classList.toggle('wiped');
+        }
+
+        // Run time check on load
+        window.onload = checkTime;
+    </script>
+</body>
+</html>
