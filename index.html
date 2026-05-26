@@ -1,251 +1,1086 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Marauder's Map - UCL</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-color: #ebdcb2;
-            --text-color: #2c2a25;
-            --accent-color: #6b2d2d;
-            --border-style: 2px solid #5a4b38;
-            --parchment-glow: radial-gradient(circle at center, #f5ecd8 0%, #d8c397 100%);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Marauder's Map: Summer at UCL</title>
 
-        /* Nox Theme (Night Mode) */
-        .nox {
-            --bg-color: #1a1a1a;
-            --text-color: #d4d4d4;
-            --accent-color: #a8a9ad; /* Silver */
-            --border-style: 2px solid #444;
-            --parchment-glow: radial-gradient(circle at center, #2a2a2a 0%, #111 100%);
-        }
+  <!--
+    HOW TO USE THIS FILE
+    1. Save this as index.html
+    2. Put it inside a GitHub repository
+    3. Optional: add your printed map image to the same folder and name it: marauders-map.jpg
+    4. Turn on GitHub Pages for the repo
 
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            background-color: var(--bg-color);
-            background-image: var(--parchment-glow);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            transition: all 0.5s ease;
-            min-height: 100vh;
-        }
+    Font note:
+    These are free web fonts chosen to get close to the old parchment / magical-map mood.
+    They are not the official Marauder's Map font. If you buy/find a legal custom font later,
+    you can add it using @font-face and replace --font-title below.
+  -->
 
-        /* Mischief Managed Blur Effect */
-        body.wiped .content-wrapper {
-            opacity: 0;
-            filter: blur(10px);
-            pointer-events: none;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Eagle+Lake&family=IM+Fell+English+SC&family=IM+Fell+Great+Primer:ital@0;1&family=Pirata+One&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
-        .content-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            transition: all 1.5s ease-in-out;
-        }
+  <style>
+    :root {
+      --ink: #2f1d11;
+      --ink-soft: #5d3b25;
+      --ink-faint: rgba(47, 29, 17, 0.22);
+      --parchment: #e6c994;
+      --parchment-light: #f4e2bb;
+      --parchment-deep: #b27c42;
+      --gold: #a56f2b;
+      --red: #7a2518;
+      --green: #3f5f36;
+      --blue: #334d66;
+      --purple: #5a3c64;
+      --orange: #91511d;
+      --shadow: rgba(45, 27, 14, 0.25);
+      --font-title: 'Eagle Lake', 'Uncial Antiqua', 'Pirata One', serif;
+      --font-map: 'IM Fell English SC', 'Pirata One', serif;
+      --font-body: 'Cormorant Garamond', 'IM Fell Great Primer', serif;
+    }
 
-        h1, h2, h3, .quote-author {
-            font-family: 'Cinzel', serif;
-            text-align: center;
-            color: var(--accent-color);
-        }
+    * { box-sizing: border-box; }
 
-        h1 { font-size: 2.5rem; margin-bottom: 5px; }
-        .subtitle { text-align: center; font-style: italic; margin-top: 0; }
+    html { scroll-behavior: smooth; }
 
-        /* Sections */
-        section {
-            border: var(--border-style);
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-        }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25), transparent 20%),
+        radial-gradient(circle at 80% 10%, rgba(95,45,12,0.16), transparent 22%),
+        radial-gradient(circle at 55% 90%, rgba(60,30,10,0.18), transparent 30%),
+        linear-gradient(135deg, #c79655 0%, #f1d49d 30%, #dfb46d 68%, #a86f37 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        /* Niche Survival Tips List */
-        .prefect-guide ul {
-            list-style-type: "⚡ ";
-            padding-left: 20px;
-        }
-        .prefect-guide li { margin-bottom: 10px; font-size: 1.1rem; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      mix-blend-mode: multiply;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(48, 25, 8, 0.08), rgba(48, 25, 8, 0.08) 1px, transparent 1px, transparent 4px),
+        repeating-linear-gradient(90deg, rgba(48, 25, 8, 0.05), rgba(48, 25, 8, 0.05) 1px, transparent 1px, transparent 6px);
+      z-index: 0;
+    }
 
-        /* Owl Post Grid */
-        .owl-post-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        .quote-card {
-            border: 1px dashed var(--accent-color);
-            padding: 15px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-style: italic;
-        }
+    .site-shell {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 70px;
+    }
 
-        /* Expandable Locations */
-        details {
-            margin-bottom: 15px;
-            border-bottom: 1px solid var(--accent-color);
-            padding-bottom: 10px;
-        }
-        summary {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            list-style: none;
-        }
-        summary::-webkit-details-marker { display: none; }
-        .location-info { padding: 10px 0; font-size: 1.1rem; }
+    .hidden-until-open {
+      display: none;
+    }
 
-        /* Floating Buttons */
-        .magic-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 1000;
-        }
-        button {
-            font-family: 'Cinzel', serif;
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 20px;
-            font-size: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-    </style>
+    body.map-open .hidden-until-open {
+      display: block;
+      animation: reveal 900ms ease both;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      padding: 44px 0;
+    }
+
+    .hero-card {
+      width: min(980px, 100%);
+      padding: clamp(28px, 6vw, 70px);
+      border: 2px solid rgba(63, 32, 14, 0.65);
+      border-radius: 34px;
+      box-shadow: 0 28px 80px rgba(58, 32, 11, 0.36), inset 0 0 80px rgba(86, 41, 11, 0.18);
+      background:
+        linear-gradient(rgba(255,255,255,0.18), rgba(255,255,255,0.02)),
+        radial-gradient(circle at 12% 18%, rgba(80, 37, 10, 0.16), transparent 20%),
+        radial-gradient(circle at 90% 74%, rgba(80, 37, 10, 0.14), transparent 26%),
+        rgba(234, 204, 151, 0.78);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "✦";
+      position: absolute;
+      font-size: clamp(46px, 8vw, 95px);
+      color: rgba(55, 28, 12, 0.12);
+      transform: rotate(-15deg);
+    }
+
+    .hero-card::before { left: 22px; top: 18px; }
+    .hero-card::after { right: 24px; bottom: 16px; transform: rotate(18deg); }
+
+    .eyebrow {
+      font-family: var(--font-map);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--font-title);
+      font-weight: 400;
+      font-size: clamp(3.2rem, 9vw, 8.5rem);
+      line-height: 0.9;
+      text-shadow: 0 3px 0 rgba(255,255,255,0.18), 0 16px 35px rgba(60,32,13,0.25);
+    }
+
+    .subtitle {
+      margin: 20px auto 0;
+      max-width: 720px;
+      font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+      line-height: 1.35;
+      color: var(--ink-soft);
+    }
+
+    .spell-buttons {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    button,
+    .button-link {
+      appearance: none;
+      border: 1.5px solid rgba(48, 24, 9, 0.72);
+      border-radius: 999px;
+      padding: 13px 20px;
+      background: rgba(247, 224, 181, 0.72);
+      color: var(--ink);
+      cursor: pointer;
+      font-family: var(--font-map);
+      letter-spacing: 0.04em;
+      font-size: 1rem;
+      box-shadow: 0 10px 22px rgba(53, 26, 8, 0.18);
+      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button:hover,
+    .button-link:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 235, 197, 0.92);
+      box-shadow: 0 14px 28px rgba(53, 26, 8, 0.24);
+    }
+
+    button.active {
+      background: var(--ink);
+      color: var(--parchment-light);
+    }
+
+    .nav-scroll {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 0 auto 26px;
+      padding: 11px;
+      border: 1px solid rgba(52, 27, 12, 0.35);
+      border-radius: 999px;
+      background: rgba(231, 199, 142, 0.82);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 30px rgba(57, 31, 12, 0.18);
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .nav-scroll a {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: var(--font-map);
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.95rem;
+      transition: background 180ms ease;
+    }
+
+    .nav-scroll a:hover { background: rgba(255,255,255,0.24); }
+
+    .section {
+      margin: 26px 0;
+      padding: clamp(20px, 4vw, 36px);
+      border: 1.8px solid rgba(54, 29, 13, 0.46);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.28), transparent 25%),
+        radial-gradient(circle at 100% 100%, rgba(76, 34, 12, 0.12), transparent 25%),
+        rgba(239, 211, 161, 0.74);
+      box-shadow: 0 22px 50px rgba(65, 35, 13, 0.18), inset 0 0 48px rgba(97, 48, 16, 0.09);
+      position: relative;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .section-intro {
+      margin: 0 0 24px;
+      font-size: 1.15rem;
+      color: var(--ink-soft);
+      max-width: 760px;
+    }
+
+    .rule-grid,
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 16px;
+    }
+
+    .rule-card,
+    .place-card,
+    .owl-card,
+    .portkey-card {
+      border: 1.4px solid rgba(52, 27, 12, 0.42);
+      border-radius: 20px;
+      padding: 18px;
+      background:
+        linear-gradient(145deg, rgba(255,242,210,0.6), rgba(217,165,91,0.24)),
+        rgba(244, 222, 180, 0.6);
+      box-shadow: 0 10px 24px rgba(65, 35, 13, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rule-card::after,
+    .place-card::after,
+    .owl-card::after,
+    .portkey-card::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      bottom: -30px;
+      width: 90px;
+      height: 90px;
+      border: 1px solid rgba(52, 27, 12, 0.14);
+      border-radius: 50%;
+    }
+
+    .rule-card h3,
+    .place-card h3,
+    .portkey-card h3 {
+      margin: 0 0 8px;
+      font-family: var(--font-map);
+      font-size: 1.32rem;
+      line-height: 1.15;
+    }
+
+    .place-card p,
+    .rule-card p,
+    .owl-card p,
+    .portkey-card p {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.45;
+    }
+
+    .tag {
+      display: inline-flex;
+      border: 1px solid rgba(53, 28, 12, 0.36);
+      border-radius: 999px;
+      padding: 4px 9px;
+      margin-bottom: 10px;
+      font-family: var(--font-map);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .map-panel {
+      display: grid;
+      grid-template-columns: 1.5fr 0.8fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 920px) {
+      .map-panel { grid-template-columns: 1fr; }
+    }
+
+    .map-wrap {
+      min-height: 620px;
+      border-radius: 26px;
+      border: 2px solid rgba(55, 29, 12, 0.52);
+      background:
+        radial-gradient(circle at 35% 20%, rgba(255,255,255,0.22), transparent 19%),
+        radial-gradient(circle at 75% 75%, rgba(54, 26, 8, 0.14), transparent 26%),
+        rgba(230, 195, 133, 0.72);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 90px rgba(69, 32, 9, 0.22);
+    }
+
+    .map-title-mini {
+      position: absolute;
+      left: 22px;
+      top: 18px;
+      z-index: 3;
+      font-family: var(--font-title);
+      font-size: clamp(1.7rem, 4vw, 3rem);
+      transform: rotate(-1deg);
+      opacity: 0.94;
+    }
+
+    .compass {
+      position: absolute;
+      right: 18px;
+      top: 16px;
+      width: 96px;
+      height: 96px;
+      z-index: 3;
+      border: 1px solid rgba(49, 25, 10, 0.45);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-map);
+      transform: rotate(8deg);
+      background: rgba(244, 222, 179, 0.32);
+    }
+
+    .compass::before,
+    .compass::after {
+      content: "";
+      position: absolute;
+      background: rgba(49, 25, 10, 0.5);
+    }
+
+    .compass::before { width: 1px; height: 76px; }
+    .compass::after { width: 76px; height: 1px; }
+
+    .london-map-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.86;
+    }
+
+    .river {
+      fill: none;
+      stroke: rgba(81, 47, 26, 0.22);
+      stroke-width: 10;
+      stroke-linecap: round;
+    }
+
+    .road {
+      fill: none;
+      stroke: rgba(58, 33, 17, 0.24);
+      stroke-width: 2;
+      stroke-dasharray: 7 7;
+    }
+
+    .route {
+      fill: none;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 2 12;
+      opacity: 0;
+      transition: opacity 250ms ease, stroke-width 250ms ease;
+    }
+
+    .route.active { opacity: 0.95; stroke-width: 5.5; }
+
+    .route.daily { stroke: var(--ink); }
+    .route.food { stroke: var(--orange); }
+    .route.first { stroke: var(--red); }
+    .route.odd { stroke: var(--purple); }
+
+    .pin {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border-radius: 50% 50% 50% 8px;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      border: 2px solid rgba(48, 24, 9, 0.65);
+      background: var(--ink);
+      color: var(--parchment-light);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-map);
+      z-index: 5;
+      box-shadow: 0 8px 18px rgba(57, 30, 10, 0.32);
+      cursor: pointer;
+      transition: transform 180ms ease, filter 180ms ease, opacity 180ms ease;
+    }
+
+    .pin span {
+      transform: rotate(45deg);
+      font-size: 0.86rem;
+      line-height: 1;
+    }
+
+    .pin:hover,
+    .pin.focused {
+      transform: translate(-50%, -56%) rotate(-45deg) scale(1.12);
+      filter: brightness(1.08);
+      z-index: 7;
+    }
+
+    .pin.dimmed { opacity: 0.25; }
+    .pin.home { background: var(--ink); }
+    .pin.safe { background: var(--green); }
+    .pin.main { background: var(--red); }
+    .pin.side { background: var(--purple); }
+    .pin.food { background: var(--orange); }
+
+    .pin-label {
+      position: absolute;
+      transform: translate(-50%, 18px);
+      z-index: 4;
+      font-family: var(--font-map);
+      font-size: 0.84rem;
+      color: var(--ink);
+      background: rgba(239, 211, 161, 0.72);
+      border: 1px solid rgba(55, 29, 12, 0.18);
+      border-radius: 999px;
+      padding: 3px 7px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    @media (max-width: 720px) {
+      .map-wrap { min-height: 520px; }
+      .pin { width: 30px; height: 30px; }
+      .pin-label { display: none; }
+      .compass { width: 70px; height: 70px; }
+    }
+
+    .control-panel {
+      border-radius: 26px;
+      border: 1.7px solid rgba(55, 29, 12, 0.46);
+      padding: 18px;
+      background: rgba(239, 211, 161, 0.68);
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .control-panel h3 {
+      margin: 0;
+      font-family: var(--font-title);
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 1.05;
+    }
+
+    .filter-row,
+    .route-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-row button,
+    .route-row button {
+      padding: 9px 12px;
+      font-size: 0.86rem;
+    }
+
+    .place-detail {
+      border: 1.4px solid rgba(55, 29, 12, 0.38);
+      border-radius: 20px;
+      padding: 16px;
+      background: rgba(255, 238, 204, 0.54);
+      flex: 1;
+      min-height: 230px;
+    }
+
+    .place-detail .number {
+      font-family: var(--font-map);
+      color: var(--ink-soft);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .place-detail h4 {
+      margin: 6px 0 8px;
+      font-family: var(--font-map);
+      font-size: 1.55rem;
+      line-height: 1.1;
+    }
+
+    .place-detail p { font-size: 1.05rem; line-height: 1.45; }
+
+    .place-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .tiny-link {
+      font-family: var(--font-map);
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--ink-soft);
+    }
+
+    .map-image-frame {
+      position: relative;
+      border-radius: 26px;
+      overflow: hidden;
+      border: 2px solid rgba(55, 29, 12, 0.5);
+      background: rgba(239, 211, 161, 0.7);
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .map-image-frame img {
+      width: 100%;
+      display: block;
+    }
+
+    .fallback-map-note {
+      padding: 38px 22px;
+      max-width: 700px;
+    }
+
+    .fallback-map-note h3 {
+      margin: 0 0 8px;
+      font-family: var(--font-title);
+      font-size: 2.4rem;
+      font-weight: 400;
+    }
+
+    .outer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+    }
+
+    .portkey-card {
+      min-height: 130px;
+    }
+
+    .portkey-card .arrow {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      display: block;
+      margin-top: 6px;
+    }
+
+    .owl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .owl-card {
+      min-height: 150px;
+      transform: rotate(var(--tilt, 0deg));
+    }
+
+    .owl-card p {
+      font-size: 1.32rem;
+      font-style: italic;
+    }
+
+    .owl-card cite {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--font-map);
+      font-style: normal;
+      color: var(--ink-soft);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 28px;
+      color: var(--ink-soft);
+      font-size: 1rem;
+    }
+
+    .secret-note {
+      display: none;
+      margin-top: 14px;
+      border-top: 1px dashed rgba(55, 29, 12, 0.36);
+      padding-top: 14px;
+      font-style: italic;
+    }
+
+    .secret-note.visible { display: block; }
+
+    .footprints {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 2;
+      transition: opacity 500ms ease;
+    }
+
+    body.map-open .footprints { opacity: 0.26; }
+
+    .footstep {
+      position: absolute;
+      font-size: 22px;
+      color: var(--ink);
+      animation: drift 16s linear infinite;
+      transform: rotate(var(--r));
+      animation-delay: var(--d);
+    }
+
+    @keyframes drift {
+      0% { transform: translateY(110vh) rotate(var(--r)); opacity: 0; }
+      8% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% { transform: translateY(-20vh) rotate(var(--r)); opacity: 0; }
+    }
+
+    .route-key {
+      display: grid;
+      gap: 8px;
+      font-size: 0.96rem;
+      color: var(--ink-soft);
+    }
+
+    .key-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .key-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(55, 29, 12, 0.45);
+      flex: 0 0 auto;
+    }
+
+    .no-affiliation {
+      font-size: 0.82rem;
+      opacity: 0.75;
+      max-width: 760px;
+      margin: 16px auto 0;
+    }
+  </style>
 </head>
 <body>
+  <div class="footprints" aria-hidden="true">
+    <span class="footstep" style="left:8%;--d:0s;--r:-18deg;">⋔</span>
+    <span class="footstep" style="left:18%;--d:-5s;--r:14deg;">⋔</span>
+    <span class="footstep" style="left:31%;--d:-2s;--r:-9deg;">⋔</span>
+    <span class="footstep" style="left:47%;--d:-8s;--r:20deg;">⋔</span>
+    <span class="footstep" style="left:62%;--d:-3s;--r:-22deg;">⋔</span>
+    <span class="footstep" style="left:78%;--d:-9s;--r:11deg;">⋔</span>
+    <span class="footstep" style="left:91%;--d:-6s;--r:-13deg;">⋔</span>
+  </div>
 
-    <div class="content-wrapper">
+  <main class="site-shell">
+    <section class="hero" id="top">
+      <div class="hero-card">
+        <p class="eyebrow">A private field guide for two months away from home</p>
         <h1>The Marauder's Map</h1>
-        <p class="subtitle">"I solemnly swear that I am up to no good."</p>
+        <p class="subtitle">Summer at UCL — a living parchment of safe harbours, side quests, food rescue points, and small acts of bravery.</p>
+        <div class="spell-buttons">
+          <button id="openMap" type="button">I solemnly swear that I am up to no good</button>
+          <button id="closeMap" type="button">Mischief Managed</button>
+        </div>
+      </div>
+    </section>
 
-        <section class="prefect-guide">
-            <h2>The Prefect's Guide to Outsmarting Muggles</h2>
-            <ul>
-                <li><strong>The Maps Charm:</strong> Delete Google Maps. Download <em>Citymapper</em> immediately. It tells you exactly which carriage to board on the Tube for the fastest exit.</li>
-                <li><strong>The Escalator Law:</strong> Stand on the right. Walk on the left. If you stand on the left during rush hour, Muggles will unforgivably curse you.</li>
-                <li><strong>The Oxford Circus Trap:</strong> If walking through Soho or the West End, do not take the Tube one stop from Oxford Circus to Piccadilly. It takes longer to walk underground than above it.</li>
-                <li><strong>The Bus Hopper Spell:</strong> TFL gives you unlimited bus rides within one hour of your first tap. Use this to hop around without paying twice.</li>
-            </ul>
-        </section>
+    <div class="hidden-until-open">
+      <nav class="nav-scroll" aria-label="Map sections">
+        <a href="#map">Live Map</a>
+        <a href="#guide">Prefect's Guide</a>
+        <a href="#owl-post">Owl Post</a>
+        <a href="#home">Home Base</a>
+        <a href="#safe">Safe Harbours</a>
+        <a href="#main-quests">Main Quests</a>
+        <a href="#side-quests">Side Quests</a>
+        <a href="#food">Food Rescue</a>
+        <a href="#outer">Outer Realms</a>
+        <a href="#printed-map">Printed Map</a>
+      </nav>
 
-        <section class="owl-post">
-            <h2>Letters from the Owl Post</h2>
-            <div class="owl-post-grid">
-                <div class="quote-card">
-                    <p>"HARRY! DID YOU PUT YOUR NAME IN THE GOBLET OF FIRE?!"</p>
-                    <p class="quote-author">- Dumbledore (asked calmly)</p>
-                </div>
-                <div class="quote-card">
-                    <p>"HEHEHEH."</p>
-                    <p class="quote-author">- Voldemort (feeling cute)</p>
-                </div>
-                <div class="quote-card">
-                    <p>"[Insert an actual heartfelt message from a friend here. Remind them they are going to crush this semester.]"</p>
-                    <p class="quote-author">- [Friend's Name]</p>
-                </div>
-                <div class="quote-card">
-                    <p>"[Insert another real message here!]"</p>
-                    <p class="quote-author">- [Friend's Name]</p>
-                </div>
+      <section class="section" id="map">
+        <h2>The Living Map</h2>
+        <p class="section-intro">Tap any pin to reveal its purpose. Use the filters to see only safe places, food rescue, main quests, or side quests. The routes are symbolic trails, not walking directions — the real-world spell is still Google Maps or Citymapper.</p>
+
+        <div class="map-panel">
+          <div class="map-wrap" aria-label="Interactive schematic map of UCL and surrounding London locations">
+            <div class="map-title-mini">Summer at UCL</div>
+            <div class="compass">N</div>
+
+            <svg class="london-map-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <path class="river" d="M-5,88 C18,80 30,92 48,83 C65,74 80,85 105,72" />
+              <path class="road" d="M14,15 C28,24 39,27 53,39 C69,52 76,60 89,75" />
+              <path class="road" d="M7,54 C23,48 34,44 47,42 C62,40 77,36 94,31" />
+              <path class="road" d="M38,9 C41,28 43,45 42,63 C41,78 39,88 38,101" />
+              <path class="road" d="M66,8 C64,29 65,49 70,67 C73,79 82,91 97,101" />
+
+              <path id="route-daily" class="route daily" d="M76,41 C63,39 54,40 45,45 C38,49 33,50 28,51" />
+              <path id="route-food" class="route food" d="M76,41 C80,31 83,24 85,18 M76,41 C60,35 43,28 29,24" />
+              <path id="route-first" class="route first" d="M28,51 C31,58 37,62 43,59 C48,56 47,50 42,45 C36,41 31,44 28,51" />
+              <path id="route-odd" class="route odd" d="M72,58 C63,66 54,73 44,77 C38,78 33,75 30,70" />
+            </svg>
+
+            <!-- Pins are positioned roughly, not as navigation-grade geography. -->
+            <button class="pin home" style="left:76%;top:41%;" data-id="home"><span>1</span></button><span class="pin-label" style="left:76%;top:41%;">Home Base</span>
+            <button class="pin home" style="left:28%;top:51%;" data-id="ucl"><span>2</span></button><span class="pin-label" style="left:28%;top:51%;">The Academy</span>
+            <button class="pin home" style="left:32%;top:47%;" data-id="student"><span>3</span></button><span class="pin-label" style="left:32%;top:47%;">Common Room</span>
+
+            <button class="pin safe" style="left:79%;top:47%;" data-id="standrews"><span>4</span></button><span class="pin-label" style="left:79%;top:47%;">Quiet Patch</span>
+            <button class="pin safe" style="left:43%;top:59%;" data-id="russell"><span>5</span></button><span class="pin-label" style="left:43%;top:59%;">Breathing Square</span>
+            <button class="pin safe" style="left:55%;top:52%;" data-id="brunswick"><span>6</span></button><span class="pin-label" style="left:55%;top:52%;">Normalcy</span>
+            <button class="pin safe" style="left:76%;top:20%;" data-id="britishlibrary"><span>7</span></button><span class="pin-label" style="left:76%;top:20%;">Study Refuge</span>
+
+            <button class="pin main" style="left:42%;top:45%;" data-id="britishmuseum"><span>8</span></button><span class="pin-label" style="left:42%;top:45%;">First Quest</span>
+            <button class="pin main" style="left:85%;top:18%;" data-id="platform"><span>9</span></button><span class="pin-label" style="left:85%;top:18%;">Platform 9¾</span>
+            <button class="pin main" style="left:25%;top:75%;" data-id="covent"><span>10</span></button><span class="pin-label" style="left:25%;top:75%;">Theatre Quarter</span>
+
+            <button class="pin side" style="left:25%;top:43%;" data-id="grant"><span>11</span></button><span class="pin-label" style="left:25%;top:43%;">Creatures</span>
+            <button class="pin side" style="left:34%;top:78%;" data-id="soane"><span>12</span></button><span class="pin-label" style="left:34%;top:78%;">Odd Wonders</span>
+            <button class="pin side" style="left:82%;top:63%;" data-id="postal"><span>13</span></button><span class="pin-label" style="left:82%;top:63%;">Owl Post</span>
+            <button class="pin side" style="left:45%;top:74%;" data-id="novelty"><span>14</span></button><span class="pin-label" style="left:45%;top:74%;">Machines</span>
+            <button class="pin side" style="left:69%;top:57%;" data-id="stgeorges"><span>15</span></button><span class="pin-label" style="left:69%;top:57%;">Forgotten Garden</span>
+            <button class="pin side" style="left:91%;top:26%;" data-id="camley"><span>16</span></button><span class="pin-label" style="left:91%;top:26%;">Wild Patch</span>
+
+            <button class="pin food" style="left:88%;top:23%;" data-id="tamila"><span>17</span></button><span class="pin-label" style="left:88%;top:23%;">Curry Port</span>
+            <button class="pin food" style="left:29%;top:24%;" data-id="ymca"><span>18</span></button><span class="pin-label" style="left:29%;top:24%;">Dal & Rice</span>
+          </div>
+
+          <aside class="control-panel">
+            <h3>Reveal the trail</h3>
+            <div class="filter-row" aria-label="Filter map pins">
+              <button type="button" data-filter="all" class="active">All Pins</button>
+              <button type="button" data-filter="home">Home + UCL</button>
+              <button type="button" data-filter="safe">Safe</button>
+              <button type="button" data-filter="main">Main</button>
+              <button type="button" data-filter="side">Side</button>
+              <button type="button" data-filter="food">Food</button>
             </div>
-        </section>
 
-        <section class="locations" id="home-base">
-            <h2>🏰 Home Base & Daily Passage</h2>
-            <p class="subtitle">Your personal Hogwarts grounds.</p>
-            
-            <details>
-                <summary>1. Home Base: Wren Street</summary>
-                <div class="location-info">
-                    <p><strong>The Dormitory:</strong> Frances Gardner House. Your Gryffindor Tower (or Slytherin Dungeon). A brief history: This is your sanctuary. Make sure you know where the nearest late-night snack spot is for when the dining hall closes.</p>
-                    </div>
-            </details>
+            <div class="route-row" aria-label="Highlight routes">
+              <button type="button" data-route="daily">Daily Passage</button>
+              <button type="button" data-route="first">First Quest Loop</button>
+              <button type="button" data-route="food">Food Rescue</button>
+              <button type="button" data-route="odd">Oddities Trail</button>
+              <button type="button" data-route="none">Clear Routes</button>
+            </div>
 
-            <details>
-                <summary>2. The Academy: UCL Main Campus</summary>
-                <div class="location-info">
-                    <p><strong>The Classrooms:</strong> Where the magic (and heavy reading) happens. UCL is steeped in history—Jeremy Bentham's actual skeleton is kept in a box here. Very normal, definitely not dark magic.</p>
-                </div>
-            </details>
+            <div class="route-key">
+              <div class="key-item"><span class="key-dot" style="background:var(--ink)"></span> Daily Passage: Home Base → UCL</div>
+              <div class="key-item"><span class="key-dot" style="background:var(--red)"></span> First Quest: UCL → British Museum → Russell Square</div>
+              <div class="key-item"><span class="key-dot" style="background:var(--orange)"></span> Food Rescue: Home Base → Tamila / YMCA</div>
+              <div class="key-item"><span class="key-dot" style="background:var(--purple)"></span> Oddities: Postal Museum → Novelty Automation → Soane</div>
+            </div>
 
-            <details>
-                <summary>3. The Common Room: UCL Student Centre</summary>
-                <div class="location-info">
-                    <p><strong>The Room of Requirement:</strong> 24-hour access. When you need to cram for an exam or just want a coffee at 3 AM because your sleep schedule is ruined, this room will provide.</p>
-                </div>
-            </details>
-        </section>
+            <div class="place-detail" id="placeDetail">
+              <span class="number">Tap a pin</span>
+              <h4>The map is waiting.</h4>
+              <p>Choose a category or tap a numbered pin to reveal what the place is for.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
 
-        <section class="locations" id="safe-harbours">
-            <h2>🌿 Safe Harbours</h2>
-            <p class="subtitle">Herbology Greenhouses for when you need to breathe.</p>
-            <p><em>[Locations 4-6 will go here in our next step!]</em></p>
-        </section>
+      <section class="section" id="guide">
+        <h2>The Prefect's Guide to Outsmarting Muggles</h2>
+        <p class="section-intro">Small London spells that make the city less confusing in week one.</p>
+        <div class="rule-grid">
+          <article class="rule-card"><span class="tag">Maps Charm</span><h3>Citymapper before chaos.</h3><p>For London transit, Citymapper is often clearer than generic maps. It tells you platform hints, carriage advice, and better exits.</p></article>
+          <article class="rule-card"><span class="tag">Escalator Law</span><h3>Stand right. Walk left.</h3><p>On Tube escalators, standing on the left during rush hour is how you accidentally start a small war.</p></article>
+          <article class="rule-card"><span class="tag">Oxford Circus Trap</span><h3>Some Tube rides are fake shortcuts.</h3><p>One-stop central-London Tube journeys can take longer than walking above ground. Check the walking time first.</p></article>
+          <article class="rule-card"><span class="tag">Bus Hopper Spell</span><h3>One tap, many buses.</h3><p>London's bus Hopper fare lets you take unlimited bus/tram journeys within an hour of your first tap.</p></article>
+          <article class="rule-card"><span class="tag">Plastic Galleon</span><h3>Contactless is normal.</h3><p>Use a contactless card or phone on the yellow readers. Cash will mostly sit there like a decorative prop.</p></article>
+        </div>
+      </section>
 
-        <section class="locations" id="main-quests">
-            <h2>📜 Main Quests</h2>
-            <p class="subtitle">Ministry of Magic Tier Landmarks.</p>
-            <p><em>[Locations 7-10 will go here in our next step!]</em></p>
-        </section>
+      <section class="section" id="owl-post">
+        <h2>Letters from the Owl Post</h2>
+        <p class="section-intro">Replace the placeholders with real messages from friends. Keep them short, handwritten-feeling, and slightly unhinged.</p>
+        <div class="owl-grid">
+          <article class="owl-card" style="--tilt:-1.5deg"><p>“HARRY! DID YOU PUT YOUR NAME IN THE GOBLET OF FIRE?!”</p><cite>Dumbledore, asked calmly</cite></article>
+          <article class="owl-card" style="--tilt:1.2deg"><p>“HEHEHEH.”</p><cite>Voldemort, feeling cute</cite></article>
+          <article class="owl-card" style="--tilt:-0.8deg"><p>“[PLACEHOLDER: Friend 1 message]”</p><cite>Owl Post #1</cite></article>
+          <article class="owl-card" style="--tilt:1.6deg"><p>“[PLACEHOLDER: Friend 2 message]”</p><cite>Owl Post #2</cite></article>
+        </div>
+      </section>
 
-        <section class="locations" id="side-quests">
-            <h2>🔍 Side Quests</h2>
-            <p class="subtitle">Oddities and the Room of Hidden Things.</p>
-            <p><em>[Locations 11-16 will go here in our next step!]</em></p>
-        </section>
+      <section class="section" id="home">
+        <h2>Home Base & Daily Passage</h2>
+        <div class="card-grid" id="homeCards"></div>
+      </section>
 
-        <section class="locations" id="food-rescue">
-            <h2>🍲 Food Rescue</h2>
-            <p class="subtitle">The Great Hall Feasts.</p>
-            <p><em>[Locations 17-18 will go here in our next step!]</em></p>
-        </section>
+      <section class="section" id="safe">
+        <h2>Safe Harbours</h2>
+        <p class="section-intro">For low-battery evenings, homesick afternoons, and days when the city feels too loud.</p>
+        <div class="card-grid" id="safeCards"></div>
+      </section>
 
+      <section class="section" id="main-quests">
+        <h2>Main Quests</h2>
+        <p class="section-intro">Normal London things, but framed as first-confidence quests rather than tourist homework.</p>
+        <div class="card-grid" id="mainCards"></div>
+      </section>
+
+      <section class="section" id="side-quests">
+        <h2>Side Quests</h2>
+        <p class="section-intro">Odd, safe-ish discoveries for when the main city starts feeling too polished.</p>
+        <div class="card-grid" id="sideCards"></div>
+      </section>
+
+      <section class="section" id="food">
+        <h2>Food Rescue</h2>
+        <p class="section-intro">For the day London food stops making sense and the stomach wants something familiar.</p>
+        <div class="card-grid" id="foodCards"></div>
+      </section>
+
+      <section class="section" id="outer">
+        <h2>Portkeys to the Outer Realms</h2>
+        <p class="section-intro">Not for day one. These unlock slowly, once the daily passage no longer feels like a boss fight.</p>
+        <div class="outer-grid">
+          <article class="portkey-card"><h3>Regent's Park</h3><p>For a slower day and a proper green reset.</p><span class="arrow">➔</span></article>
+          <article class="portkey-card"><h3>Camden / Hampstead</h3><p>For markets, hills, and wandering beyond the student bubble.</p><span class="arrow">➔</span></article>
+          <article class="portkey-card"><h3>Soho / Chinatown</h3><p>For food, theatre energy, and evening chaos with company.</p><span class="arrow">➔</span></article>
+          <article class="portkey-card"><h3>South Bank</h3><p>For a classic Thames walk when London needs to look like London.</p><span class="arrow">➔</span></article>
+          <article class="portkey-card"><h3>Greenwich</h3><p>For a bigger weekend quest and a clean break from central London.</p><span class="arrow">➔</span></article>
+        </div>
+      </section>
+
+      <section class="section" id="printed-map">
+        <h2>The Folded Artefact</h2>
+        <p class="section-intro">Add your printed-map image to the GitHub folder as <strong>marauders-map.jpg</strong>. This section will automatically show it. The QR button can point to the Google Maps list later.</p>
+        <div class="map-image-frame">
+          <img src="marauders-map.jpg" alt="The printed Marauder's Map for Summer at UCL" onerror="this.remove();document.querySelector('.fallback-map-note').style.display='block';" />
+          <div class="fallback-map-note" style="display:none;">
+            <h3>The printed map goes here.</h3>
+            <p>Upload your final JPEG to the same GitHub folder and name it <strong>marauders-map.jpg</strong>. Refresh the site and it will appear here.</p>
+          </div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+          <a class="button-link" href="https://www.google.com/maps" target="_blank" rel="noopener">Open the live map spell</a>
+          <button type="button" id="secretButton">Reveal a hidden note</button>
+        </div>
+        <p class="secret-note" id="secretNote">When the city feels too big, start from the smallest possible quest: step outside, find one warm drink, return safely. That still counts as bravery.</p>
+      </section>
+
+      <p class="footer">Made as a fan-style personal gift. Not affiliated with or endorsed by the owners of the Harry Potter / Wizarding World properties.</p>
+      <p class="footer no-affiliation">Tip: before sharing publicly, replace placeholder messages and update the Google Maps button with your actual saved-list link.</p>
     </div>
+  </main>
 
-    <div class="magic-controls">
-        <button onclick="toggleNox()">Lumos / Nox</button>
-        <button onclick="mischiefManaged()">Mischief Managed</button>
-    </div>
+  <script>
+    const places = {
+      home: {
+        n: 1, category: 'home', title: 'Home Base', real: 'Wren Street / Frances Gardner House',
+        description: 'Your sanctuary. The wards are set. This is where the map begins and where every quest safely ends.',
+        query: 'Frances Gardner House Wren Street London WC1X 0HD'
+      },
+      ucl: {
+        n: 2, category: 'home', title: 'The Academy', real: 'UCL Main Campus',
+        description: 'Where the magic happens. Old buildings, new panic, and just enough academic drama to count as a proper summer semester.',
+        query: 'UCL Main Campus London'
+      },
+      student: {
+        n: 3, category: 'home', title: 'The Common Room', real: 'UCL Student Centre',
+        description: 'The Room of Requirement. Use it when you need quiet, Wi-Fi, people nearby, or a place to pretend everything is under control.',
+        query: 'UCL Student Centre London'
+      },
+      standrews: {
+        n: 4, category: 'safe', title: 'Nearest Quiet Patch', real: "St Andrew's Gardens",
+        description: 'A small, gothic-feeling reset spot close to home. Good for breathing, sitting, and not making a production out of homesickness.',
+        query: "St Andrew's Gardens London Wren Street"
+      },
+      russell: {
+        n: 5, category: 'safe', title: 'The Breathing Square', real: 'Russell Square',
+        description: 'A dependable bench-and-coffee square. Sit here when the city is loud and you need London to behave for fifteen minutes.',
+        query: 'Russell Square London'
+      },
+      brunswick: {
+        n: 6, category: 'safe', title: 'Supplies & Normalcy', real: 'The Brunswick Centre',
+        description: 'Muggle Diagon Alley for groceries, food, errands, and the psychological comfort of a normal evening.',
+        query: 'The Brunswick Centre London'
+      },
+      britishlibrary: {
+        n: 7, category: 'safe', title: 'The Grand Study Refuge', real: 'British Library',
+        description: 'The Restricted Section energy, but legal. A safe indoor place to study, wander, or feel surrounded by serious people doing serious things.',
+        query: 'British Library London'
+      },
+      britishmuseum: {
+        n: 8, category: 'main', title: 'The First Great Quest', real: 'British Museum',
+        description: 'Close, iconic, free, and slightly overwhelming. Mission: pick one object you would remember even after leaving London.',
+        query: 'British Museum London'
+      },
+      platform: {
+        n: 9, category: 'main', title: 'Platform 9¾', real: "King's Cross Station",
+        description: 'You know exactly what to do. Just do not actually sprint into the barrier. The photo queue is the real trial.',
+        query: "Platform 9 3/4 King's Cross Station London"
+      },
+      covent: {
+        n: 10, category: 'main', title: 'The Theatre Quarter', real: "Covent Garden / Seven Dials / Neal's Yard",
+        description: 'Twisting lanes, street performers, hidden colour, and the easiest place to feel like London is performing for you.',
+        query: "Covent Garden Seven Dials Neal's Yard London"
+      },
+      grant: {
+        n: 11, category: 'side', title: 'The Cabinet of Creatures', real: 'Grant Museum of Zoology',
+        description: 'Pure Care of Magical Creatures. Strange specimens, skeletons, jars, and the academic weirdness UCL does best.',
+        query: 'Grant Museum of Zoology UCL London'
+      },
+      soane: {
+        n: 12, category: 'side', title: 'The House of Odd Wonders', real: "Sir John Soane's Museum",
+        description: 'A preserved labyrinth of objects, shadows, rooms, and surprises. Very “I found a secret door” energy.',
+        query: "Sir John Soane's Museum London"
+      },
+      postal: {
+        n: 13, category: 'side', title: 'The Underground Owl Post', real: 'The Postal Museum / Mail Rail',
+        description: 'A hidden mail route beneath London. If owls had an underground logistics department, this would be it.',
+        query: 'The Postal Museum Mail Rail London'
+      },
+      novelty: {
+        n: 14, category: 'side', title: 'The Room of Ridiculous Machines', real: 'Novelty Automation, Holborn',
+        description: 'Arthur Weasley would lose his mind here. A tiny arcade of strange handmade mechanical muggle contraptions.',
+        query: 'Novelty Automation Holborn London'
+      },
+      stgeorges: {
+        n: 15, category: 'side', title: 'The Forgotten Garden', real: "St George's Gardens",
+        description: 'Quiet, atmospheric, historical, and slightly haunted in the best possible way. A soft side quest for a slow day.',
+        query: "St George's Gardens London"
+      },
+      camley: {
+        n: 16, category: 'side', title: 'The Hidden Wild Patch', real: 'Camley Street Natural Park',
+        description: 'The edge of the Forbidden Forest, but near King’s Cross. Best treated as a daytime nature reset.',
+        query: 'Camley Street Natural Park London'
+      },
+      tamila: {
+        n: 17, category: 'food', title: 'The Curry Port', real: "Tamila, King's Cross",
+        description: 'A restorative potion for homesickness. South Indian comfort, close enough to become a rescue route.',
+        query: "Tamila King's Cross London"
+      },
+      ymca: {
+        n: 18, category: 'food', title: 'Emergency Dal & Rice Hall', real: 'Indian YMCA Dining Hall, Fitzroy Square',
+        description: 'Molly Weasley-level comfort. No-nonsense Indian canteen energy for the day the stomach wants home.',
+        query: 'Indian YMCA Dining Hall Fitzroy Square London'
+      }
+    };
 
-    <script>
-        // Lumos/Nox Time Magic
-        function checkTime() {
-            const hour = new Date().getHours();
-            // If it's past 7 PM (19:00) or before 6 AM, trigger Nox (Dark Mode)
-            if (hour >= 19 || hour < 6) {
-                document.body.classList.add('nox');
-            }
-        }
+    const categoryTargets = {
+      home: document.getElementById('homeCards'),
+      safe: document.getElementById('safeCards'),
+      main: document.getElementById('mainCards'),
+      side: document.getElementById('sideCards'),
+      food: document.getElementById('foodCards')
+    };
 
-        // Manual toggle for testing
-        function toggleNox() {
-            document.body.classList.toggle('nox');
-        }
+    function mapsLink(query) {
+      return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+    }
 
-        // Mischief Managed Blur Effect
-        function mischiefManaged() {
-            const body = document.body;
-            body.classList.toggle('wiped');
-        }
+    function renderCards() {
+      Object.values(places).forEach(place => {
+        const card = document.createElement('article');
+        card.className = 'place-card';
+        card.innerHTML = `
+          <span class="tag">Pin ${place.n} · ${place.real}</span>
+          <h3>${place.title}</h3>
+          <p>${place.description}</p>
+          <div class="place-actions">
+            <a class="tiny-link" href="${mapsLink(place.query)}" target="_blank" rel="noopener">Open in Google Maps</a>
+          </div>
+        `;
+        categoryTargets[place.category].appendChild(card);
+      });
+    }
 
-        // Run time check on load
-        window.onload = checkTime;
-    </script>
+    function showPlace(id) {
+      const place = places[id];
+      const detail = document.getElementById('placeDetail');
+      document.querySelectorAll('.pin').forEach(pin => pin.classList.toggle('focused', pin.dataset.id === id));
+      detail.innerHTML = `
+        <span class="number">Pin ${place.n} · ${place.real}</span>
+        <h4>${place.title}</h4>
+        <p>${place.description}</p>
+        <div class="place-actions">
+          <a class="button-link" href="${mapsLink(place.query)}" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      `;
+    }
+
+    function filterPins(category) {
+      document.querySelectorAll('.filter-row button').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === category));
+      document.querySelectorAll('.pin').forEach(pin => {
+        const id = pin.dataset.id;
+        const match = category === 'all' || places[id].category === category;
+        pin.classList.toggle('dimmed', !match);
+      });
+    }
+
+    function showRoute(route) {
+      document.querySelectorAll('.route-row button').forEach(btn => btn.classList.toggle('active', btn.dataset.route === route));
+      document.querySelectorAll('.route').forEach(line => line.classList.remove('active'));
+      if (route !== 'none') {
+        const line = document.getElementById('route-' + route);
+        if (line) line.classList.add('active');
+      }
+    }
+
+    document.getElementById('openMap').addEventListener('click', () => {
+      document.body.classList.add('map-open');
+      setTimeout(() => document.getElementById('map').scrollIntoView({ behavior: 'smooth' }), 400);
+    });
+
+    document.getElementById('closeMap').addEventListener('click', () => {
+      document.body.classList.remove('map-open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.querySelectorAll('.pin').forEach(pin => {
+      pin.addEventListener('click', () => showPlace(pin.dataset.id));
+    });
+
+    document.querySelectorAll('.filter-row button').forEach(btn => {
+      btn.addEventListener('click', () => filterPins(btn.dataset.filter));
+    });
+
+    document.querySelectorAll('.route-row button').forEach(btn => {
+      btn.addEventListener('click', () => showRoute(btn.dataset.route));
+    });
+
+    document.getElementById('secretButton').addEventListener('click', () => {
+      document.getElementById('secretNote').classList.toggle('visible');
+    });
+
+    renderCards();
+    showRoute('daily');
+  </script>
 </body>
 </html>
