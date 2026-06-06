@@ -750,6 +750,62 @@
     padding: 16px;
   }
 }
+    /* ========================================================
+   THE MARAUDER'S MAP MASTER UX/UI UPGRADE
+   ======================================================== */
+
+/* 1. GLOBAL FIX: Kills the clunky browser blue box highlight on touch */
+* {
+  -webkit-tap-highlight-color: transparent !important;
+}
+button:focus, .btn:focus, a:focus {
+  outline: none !important;
+}
+
+/* 2. MOBILE INTERACTION & LAYOUT REFINEMENTS */
+@media (max-width: 620px) {
+  /* Aligns the 18 pin categories to the center instead of the right */
+  .filters {
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 4px 0 !important;
+  }
+
+  /* Enables native app-like swipe physics for menus under the thumb */
+  .nav, .filters {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+  .nav button, .filters button {
+    scroll-snap-align: center;
+  }
+
+  /* Fixes the scroll trap: places active pin details right under where they click */
+  .directory-layout, .detail-layout {
+    display: flex !important;
+    flex-direction: column-reverse;
+    gap: 20px !important;
+  }
+
+  /* Ambient glowing background texture for the 18 pin cards */
+  .place-card {
+    background: 
+      radial-gradient(circle at 50% 120%, rgba(201, 164, 73, 0.15), transparent 70%),
+      linear-gradient(180deg, rgba(18, 52, 37, 0.95), rgba(6, 17, 12, 0.98)) !important;
+    border: 1px solid rgba(201, 164, 73, 0.25) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 0 20px rgba(201,164,73,0.05) !important;
+    transition: all 0.2s ease;
+  }
+
+  /* Styles the massive background numbers on the cards with a gold tint */
+  .place-card::before {
+    color: rgba(201, 164, 73, 0.12) !important;
+    font-size: 5.5rem !important;
+    right: 12px !important;
+    top: -5px !important;
+  }
+}
   </style>
 </head>
 <body>
