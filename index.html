@@ -989,10 +989,25 @@ h1 {
   box-shadow: 0 8px 25px rgba(0,0,0,0.5) !important;
 }
     /* ========================================================
-   THE MARAUDER'S MAP FINISHING TOUCHES (AESTHETIC & QoL PACK)
+   T/* ========================================================
+   THE MARAUDER'S MAP FINISHING TOUCHES (UPGRADED REPAIR PACK)
    ======================================================== */
 
-/* 1. Theme-accurate text selection highlight */
+/* FIX 1: Forces the top navigation title to stay on one elegant line on PC */
+.brand {
+  white-space: nowrap !important; /* Prevents text from dropping to a second line */
+}
+.brand span:last-child {
+  font-size: clamp(0.8rem, 1.1vw, 1.1rem) !important; /* Dynamically shrinks slightly on crowded PC screens */
+}
+
+/* FIX 2: Smashes the old "transition: none" locks so buttons can smoothly fade */
+button, .btn, .navbtn, .place-card, #filters button {
+  transition: 
+    background 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* 3. Theme-accurate text selection highlight */
 ::selection {
   background-color: rgba(25, 163, 108, 0.35) !important;
   color: #fff7dd !important;
@@ -1002,7 +1017,7 @@ h1 {
   color: #fff7dd !important;
 }
 
-/* 2. Sleek dark-parchment styled scrollbars */
+/* 4. Sleek dark-parchment styled scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -1018,16 +1033,7 @@ h1 {
   background: rgba(201, 164, 73, 0.5);
 }
 
-/* 3. High-end easing animation curves for interactive tags */
-button, .btn, .navbtn, .place-card {
-  transition: 
-    background 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
-    border-color 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
-    transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1),
-    box-shadow 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-}
-
-/* 4. Subtle gold aura boundary light on the sticky header */
+/* 5. Subtle gold aura boundary light on the sticky header */
 .topbar {
   box-shadow: 
     0 18px 45px rgba(0,0,0,0.5), 
