@@ -969,6 +969,25 @@ h1 {
     top: -5px !important;
   }
 }
+    /* --- SURGICAL VISUAL CLEANUP --- */
+.info-grid, .quest-box, .detail-side, #view-places .stats-grid { 
+  display: none !important; 
+}
+
+.place-detail {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.place-detail img {
+  width: 100% !important;
+  max-height: 250px !important;
+  object-fit: cover !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(201, 164, 73, 0.35) !important;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5) !important;
+}
   </style>
 </head>
 <body>
@@ -1360,27 +1379,24 @@ h1 {
 
       document.getElementById('detailMain').innerHTML = `
         <p class="detail-kicker">${categoryIcons[p.category]} Pin ${p.n} · ${categoryLabels[p.category]}</p>
-        <h2 class="detail-title">${p.title}</h2>
-        <p class="detail-real">${p.real} · <span style="color:var(--gold)">${p.tone}</span></p>
-        <p class="detail-copy">${p.short}</p>
-        <div class="info-grid">
-          <div class="info-box"><h3>History / Context</h3><p>${p.history}</p></div>
-          <div class="info-box"><h3>Why it is worth going</h3><p>${p.why}</p></div>
-          <div class="info-box"><h3>Practical note</h3><p>${p.tips}</p></div>
-          <div class="info-box"><h3>${p.category === 'food' ? 'Review signal' : 'Tiny quest'}</h3><p>${p.category === 'food' ? p.review : p.quest}</p></div>
+        <h2 class="detail-title" style="margin-bottom: 8px;">${p.title}</h2>
+        
+        <img src="pin${p.n}.jpg" class="pin-photo" alt="${p.title}" onerror="this.style.display='none';" style="width: 100%; max-height: 280px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(201, 164, 73, 0.35); box-shadow: 0 8px 25px rgba(0,0,0,0.5); margin-bottom: 16px;">
+        
+        <p class="detail-copy" style="line-height: 1.7; font-size: 1.05rem; color: #fff3cd; margin: 12px 0 20px 0;">${p.why}</p>
+        
+        <div class="lore-box" style="border: 1px solid rgba(201,164,73,0.25); padding: 16px; border-radius: 14px; background: rgba(0,0,0,0.2); margin-top: 14px;">
+          <h4 style="color: var(--gold); margin: 0 0 6px 0; font-family: var(--head); letter-spacing: 0.05em;">Secret History &amp; Anomalies</h4>
+          <p style="font-size: 0.95rem; margin: 0; line-height: 1.6; color: var(--muted);">${p.history}</p>
         </div>
       `;
 
       document.getElementById('detailSide').innerHTML = `
         <h3>Field Actions</h3>
-        <div class="quest-box">
-          <p class="detail-kicker">Quest</p>
-          <p class="muted">${p.quest}</p>
-        </div>
         <a class="btn primary" href="${mapsLink(p.query)}" target="_blank" rel="noopener">Open this pin in Google Maps</a>
         <a class="btn" href="${LIVE_MAP_LINK}" target="_blank" rel="noopener">Open full live map</a>
         <button type="button" data-view="places">Back to 18 pins</button>
-        <div class="info-box">
+        <div class="info-box" style="margin-top: 14px;">
           <h3>Category</h3>
           <p>${categoryLabels[p.category]} · ${p.tags.join(' · ')}</p>
         </div>
@@ -1394,6 +1410,9 @@ h1 {
       location.hash = 'pin-' + p.n;
     }
 
+    // ========================================================
+    // PRESERVED ENGINE LOGIC (DO NOT TOUCH - KEEPS OTHER PAGES ALIVE)
+    // ========================================================
     function renderGuide() {
       document.getElementById('guideGrid').innerHTML = guideItems.map(item => `
         <article class="guide-card"><h3>${item.title}</h3><p>${item.text}</p></article>
@@ -1425,9 +1444,11 @@ h1 {
       renderPlaces();
     });
 
+    // Boot up commands
     renderPlaces();
     renderGuide();
     renderQuotes();
+    
   </script>
 </body>
 </html>
