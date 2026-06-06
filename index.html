@@ -806,6 +806,169 @@ button:focus, .btn:focus, a:focus {
     top: -5px !important;
   }
 }
+    /* ========================================================
+   THE MARAUDER'S MAP ULTIMATE MASTER ALL-IN-ONE PACK
+   ======================================================== */
+
+/* 1. GLOBAL FIXES: Blue highlights, Title Overflow, & Image Frames */
+* {
+  -webkit-tap-highlight-color: transparent !important;
+}
+button:focus, .btn:focus, a:focus {
+  outline: none !important;
+}
+
+h1 {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+}
+
+.pin-photo {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(201, 164, 73, 0.35);
+  margin: 8px 0 16px 0;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  display: block;
+}
+
+.lore-box {
+  border: 1px solid rgba(201, 164, 73, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(0,0,0,0.25);
+  margin-top: 14px;
+}
+.lore-box h4 {
+  margin: 0 0 6px 0;
+  font-family: var(--head);
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+
+/* 2. SCROLL REVEAL ANIMATION (Elements fade & slide up as you scroll) */
+@keyframes fadeOnScroll {
+  from { 
+    opacity: 0; 
+    transform: translateY(24px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Tells modern browsers to animate boxes only when they enter the screen */
+@supports (animation-timeline: view()) {
+  .panel, .place-card, .lore-box, .quote-card, .guide-card, .artifact-card {
+    animation: fadeOnScroll linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%;
+  }
+}
+
+/* 3. MOBILE INTERACTION & RESPONSIVE LAYOUTS */
+@media (max-width: 620px) {
+  h1 {
+    font-size: clamp(2.2rem, 9.5vw, 3.8rem) !important; 
+    line-height: 1.0 !important;
+    font-weight: 700;
+  }
+  
+  .shell { 
+    width: calc(100vw - 16px); 
+    padding: 8px 0 20px;
+  }
+  
+  .topbar { 
+    border-radius: 16px; 
+    padding: 8px 12px;
+    top: 6px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .brand span:last-child {
+    display: none; 
+  }
+  
+  .brand {
+    padding-left: 0;
+    justify-content: center;
+  }
+  
+  .nav { 
+    width: 100%; 
+    justify-content: flex-start;
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+  
+  button, .btn {
+    min-height: 48px;
+    padding: 0 16px;
+    font-weight: 600;
+    flex: 0 0 auto;
+  }
+  
+  .grand-card { 
+    min-height: auto; 
+    border-radius: 20px; 
+    padding: 24px 16px;
+  }
+  
+  .subline {
+    color: #fff;
+  }
+  
+  .filters {
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 4px 0 !important;
+  }
+
+  .nav, .filters {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+  
+  .nav button, .filters button {
+    scroll-snap-align: center;
+  }
+
+  .directory-layout, .detail-layout {
+    display: flex !important;
+    flex-direction: column-reverse;
+    gap: 20px !important;
+  }
+
+  .place-card {
+    background: 
+      radial-gradient(circle at 50% 120%, rgba(201, 164, 73, 0.15), transparent 70%),
+      linear-gradient(180deg, rgba(18, 52, 37, 0.95), rgba(6, 17, 12, 0.98)) !important;
+    border: 1px solid rgba(201, 164, 73, 0.25) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 0 20px rgba(201, 164, 73, 0.05) !important;
+    transition: all 0.2s ease;
+    min-height: 220px; 
+  }
+
+  .panel, .place-detail, .detail-side { 
+    border-radius: 20px; 
+    padding: 16px;
+  }
+
+  .place-card::before {
+    color: rgba(201, 164, 73, 0.12) !important;
+    font-size: 5.5rem !important;
+    right: 12px !important;
+    top: -5px !important;
+  }
+}
   </style>
 </head>
 <body>
