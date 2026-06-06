@@ -694,6 +694,62 @@
       .place-card { min-height: 250px; }
       .panel, .place-detail, .detail-side { border-radius: 24px; }
     }
+    /* --- VIBE CODING MOBILE FIX UPGRADE --- */
+@media (max-width: 620px) {
+  .shell { 
+    width: calc(100vw - 16px); 
+    padding: 8px 0 20px;
+  }
+  .topbar { 
+    border-radius: 16px; 
+    padding: 8px 12px;
+    top: 6px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .brand span:last-child {
+    display: none; 
+  }
+  .brand {
+    padding-left: 0;
+    justify-content: center;
+  }
+  .nav { 
+    width: 100%; 
+    justify-content: flex-start;
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+  button, .btn {
+    min-height: 48px;
+    padding: 0 16px;
+    font-weight: 600;
+    flex: 0 0 auto;
+  }
+  .grand-card { 
+    min-height: auto; 
+    border-radius: 20px; 
+    padding: 24px 16px;
+  }
+  h1 {
+    font-weight: 700;
+    line-height: 0.95;
+  }
+  .subline {
+    color: #fff;
+  }
+  .stats-grid { 
+    grid-template-columns: 1fr; 
+  }
+  .place-card { 
+    min-height: 220px; 
+  }
+  .panel, .place-detail, .detail-side { 
+    border-radius: 20px; 
+    padding: 16px;
+  }
+}
   </style>
 </head>
 <body>
