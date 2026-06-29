@@ -834,13 +834,35 @@ h1 {
   box-shadow: 0 8px 25px rgba(0,0,0,0.5);
   display: block;
 }
-
+    
 .lore-box {
   border: 1px solid rgba(201, 164, 73, 0.2);
   border-radius: 16px;
   padding: 16px;
   background: rgba(0,0,0,0.25);
   margin-top: 14px;
+}
+.info-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:16px;
+margin-bottom:24px;
+}
+
+.info-card{
+background:rgba(0,0,0,.28);
+border:1px solid rgba(201,164,73,.25);
+padding:16px;
+border-radius:14px;
+}
+
+.info-card .label{
+color:var(--gold);
+font-family:var(--head);
+font-size:.82rem;
+letter-spacing:.08em;
+text-transform:uppercase;
+margin-bottom:8px;
 }
 .lore-box h4 {
   margin: 0 0 6px 0;
