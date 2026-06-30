@@ -1436,19 +1436,79 @@ button, .btn, .navbtn, .place-card, #filters button {
       const p = places.find(item => item.id === id);
       if (!p) return;
 
-      document.getElementById('detailMain').innerHTML = `
-        <p class="detail-kicker">${categoryIcons[p.category]} Pin ${p.n} · ${categoryLabels[p.category]}</p>
-        <h2 class="detail-title" style="margin-bottom: 8px;">${p.title}</h2>
-        
-        <img src="pin${p.n}.jpg" class="pin-photo" alt="${p.title}" onerror="this.style.display='none';" style="width: 100%; max-height: 280px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(201, 164, 73, 0.35); box-shadow: 0 8px 25px rgba(0,0,0,0.5); margin-bottom: 16px;">
-        
-        <p class="detail-copy" style="line-height: 1.7; font-size: 1.05rem; color: #fff3cd; margin: 12px 0 20px 0;">${p.why}</p>
-        
-        <div class="lore-box" style="border: 1px solid rgba(201,164,73,0.25); padding: 16px; border-radius: 14px; background: rgba(0,0,0,0.2); margin-top: 14px;">
-          <h4 style="color: var(--gold); margin: 0 0 6px 0; font-family: var(--head); letter-spacing: 0.05em;">Secret History &amp; Anomalies</h4>
-          <p style="font-size: 0.95rem; margin: 0; line-height: 1.6; color: var(--muted);">${p.history}</p>
-        </div>
-      `;
+document.getElementById('detailMain').innerHTML = `
+
+<p class="detail-kicker">
+${categoryIcons[p.category]} Pin ${p.n} · ${categoryLabels[p.category]}
+</p>
+
+<h2 class="detail-title">
+${p.title}
+</h2>
+
+<img
+src="pin${p.n}.jpg"
+class="pin-photo"
+alt="${p.title}"
+onerror="this.style.display='none';"
+style="
+width:100%;
+max-height:360px;
+object-fit:cover;
+border-radius:16px;
+margin:22px 0;
+border:1px solid rgba(201,164,73,.35);
+box-shadow:0 12px 30px rgba(0,0,0,.45);
+">
+
+${p.why ? `
+<div class="lore-box">
+<h3>Why Go?</h3>
+<p>${p.why}</p>
+</div>
+` : ""}
+
+${p.history ? `
+<div class="lore-box">
+<h3>Secret History & Anomalies</h3>
+<p>${p.history}</p>
+</div>
+` : ""}
+
+${p.tip ? `
+<div class="lore-box">
+<h3>Insider Tips</h3>
+<p>${p.tip}</p>
+</div>
+` : ""}
+
+${p.quest ? `
+<div class="lore-box">
+<h3>Your Quest</h3>
+<p>${p.quest}</p>
+</div>
+` : ""}
+
+${p.tags && p.tags.length ? `
+<div class="lore-box">
+<h3>Tags</h3>
+<p>${p.tags.join(" • ")}</p>
+</div>
+` : ""}
+
+${p.query ? `
+<div style="margin-top:28px;">
+<a
+class="btn primary"
+href="${mapsLink(p.query)}"
+target="_blank"
+rel="noopener">
+Open in Google Maps
+</a>
+</div>
+` : ""}
+
+`;
 
       document.getElementById('detailSide').innerHTML = `
         <h3>Field Actions</h3>
@@ -1457,7 +1517,10 @@ button, .btn, .navbtn, .place-card, #filters button {
         <button type="button" data-view="places">Back to 18 pins</button>
         <div class="info-box" style="margin-top: 14px;">
           <h3>Category</h3>
-          <p>${categoryLabels[p.category]} · ${p.tags.join(' · ')}</p>
+<p>
+${categoryLabels[p.category]}
+${p.tags?.length ? " · " + p.tags.join(" · ") : ""}
+</p>
         </div>
       `;
 
